@@ -9,7 +9,7 @@ if ($id <= 0) {
 }
 
 
-$stmt = $conn->prepare("SELECT id_ordem, descricao, data_entrada, valor, form_pgt, garantia, id_relogio FROM ordem_servico WHERE id_ordem = ?");
+$stmt = $conn->prepare("SELECT id_ordem, descricao, data_entrada, valor, forma_pgt, garantia, id_relogio FROM ordem_servico WHERE id_ordem = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_relogio = $_POST ['id_relogio'];
 
     $stmt = $conn->prepare("UPDATE ordem_servico SET descricao=?, data_entrada=?, valor=?, forma_pgt=?, garantia=?, id_relogio=? WHERE id_ordem=?");
-    $stmt->bind_param("sssssi", $descricao, $data_entrada, $valor, $forma_pgt, $garantia, $id_relogio $id);
+    $stmt->bind_param("ssdssii", $descricao, $data_entrada, $valor, $forma_pgt, $garantia, $id_relogio, $id);
 
     if ($stmt->execute()) {
         echo "<script>alert('Ordem atualizado com sucesso!'); window.location='ListagemOrdem.php';</script>";
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="descricao" value="<?= htmlspecialchars($row['descricao']) ?>" required><br><br>
 
         <label>Data de Entrada:</label><br>
-        <input type="text" name="data_entrada" value="<?= htmlspecialchars($row['data_entrada']) ?>" required><br><br>
+        <input type="date" name="data_entrada" value="<?= htmlspecialchars($row['data_entrada']) ?>" required><br><br>
 
         <label>Valor:</label><br>
         <input type="text" name="valor" value="<?= htmlspecialchars($row['valor']) ?>" required><br><br>
@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label>Garantia</label><br>
         <input type="text" name="garantia" value="<?= htmlspecialchars($row['garantia']) ?>" required><br><br>
         
-        <label>ID do Cliente</label><br>
-        <input type="text" name="id_cliente" value="<?= htmlspecialchars($row['id_cliente'])?>" required><br><br>
+        <label>ID do Relógio</label><br>
+        <input type="text" name="id_relogio" value="<?= htmlspecialchars($row['id_relogio'])?>" required><br><br>
 
 
         <button type="submit">Salvar Alterações</button>
