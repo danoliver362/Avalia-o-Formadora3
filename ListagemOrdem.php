@@ -50,5 +50,8 @@ $result = $conn->query($sql);
     }
     ?>
 </table>
+    <br>
+        <a href="PaginaInicial.html">Voltar ao início</a>
+
 </body>
 </html>
