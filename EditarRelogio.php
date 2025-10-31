@@ -8,7 +8,6 @@ if ($id <= 0) {
     die("ID inválido.");
 }
 
-
 $stmt = $conn->prepare("SELECT id_relogio, marca, modelo, num_serie, id_cliente FROM relogios WHERE id_relogio = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -18,7 +17,6 @@ if (!$row) {
     die("Relógio não encontrado.");
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $marca = $_POST['marca'];
     $modelo = $_POST['modelo'];
@@ -26,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_cliente = $_POST['id_cliente'];
 
     $stmt = $conn->prepare("UPDATE relogios SET marca=?, modelo=?, num_serie=?, id_cliente=? WHERE id_relogio=?");
-    $stmt->bind_param("sssssi", $marca, $modelo, $num_serie, $id_cliente, $id);
+    $stmt->bind_param("sssii", $marca, $modelo, $num_serie, $id_cliente, $id);
 
     if ($stmt->execute()) {
         echo "<script>alert('Relógio atualizado com sucesso!'); window.location='ListagemRelogio.php';</script>";
@@ -41,10 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Relogio</title>
+    <title>Editar Relógio</title>
 </head>
 <body>
-    <h1>Editar Relogio</h1>
+    <h1>Editar Relógio</h1>
     <form method="post">
         <label>Marca:</label><br>
         <input type="text" name="marca" value="<?= htmlspecialchars($row['marca']) ?>" required><br><br>
@@ -52,12 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label>Modelo:</label><br>
         <input type="text" name="modelo" value="<?= htmlspecialchars($row['modelo']) ?>" required><br><br>
 
-        <label>Número de Serie:</label><br>
+        <label>Número de Série:</label><br>
         <input type="text" name="num_serie" value="<?= htmlspecialchars($row['num_serie']) ?>" required><br><br>
 
         <label>ID do Cliente:</label><br>
-        <input type="text" name="id_cliente" value="<?= htmlspecialchars($row['id_cliente']) ?>" required><br><br>
-
+        <input type="number" name="id_cliente" value="<?= htmlspecialchars($row['id_cliente']) ?>" required><br><br>
 
         <button type="submit">Salvar Alterações</button>
     </form>
