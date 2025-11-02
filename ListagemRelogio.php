@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('conexao.php');
 
-$sql = "SELECT id_relogio, marca, modelo, num_serie, , id_cliente FROM relogios";
+$sql = "SELECT id_relogio, marca, modelo, num_serie, id_cliente FROM relogios";
 $result = $conn->query($sql);
 ?>
 
