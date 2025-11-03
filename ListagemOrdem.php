@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('conexao.php');
 
-$sql = "SELECT id_ordem, descricao, data_entrada, valor, forma_pgt, garantia, id_relogio, status FROM ordem_servico";
+$sql = "SELECT id_ordem, descricao, data_entrada, valor, forma_pgt, garantia, id_relogio, status FROM ordens_servico";
 $result = $conn->query($sql);
 ?>
 
@@ -26,6 +26,8 @@ $result = $conn->query($sql);
         <th>Forma de Pagamento</th>
         <th>Garantia</th>
         <th>ID do Relogio</th>
+        <th>Status</th>
+        <th>Açoes</th>
     </tr>
 
     <?php
@@ -38,7 +40,8 @@ $result = $conn->query($sql);
             echo "<td>{$row['valor']}</td>";
             echo "<td>{$row['forma_pgt']}</td>";
             echo "<td>{$row['garantia']}</td>";
-            echo "<td>{$row['id_relogio]}</td>"
+            echo "<td>{$row['id_relogio']}</td>";
+            echo "<td>{$row['status']}</td>";
             echo "<td>
                     <a href='EditarOrdem.php?id={$row['id_ordem']}'>Editar</a> |
                     <a href='ExcluirOrdem.php?id={$row['id_ordem']}' onclick='return confirm(\"Tem certeza que deseja excluir?\")'>Excluir</a>
@@ -55,3 +58,4 @@ $result = $conn->query($sql);
 
 </body>
 </html>
+
