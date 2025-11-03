@@ -3,13 +3,13 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include('conexao.php');
 
-// Pega o ID do cliente da URL
+
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id <= 0) {
     die("ID inválido.");
 }
 
-// Busca os dados do cliente para preencher o formulário
+
 $stmt = $conn->prepare("SELECT nome, sobrenome, cpf, tipo, telefone FROM clientes WHERE id_cliente = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -19,7 +19,7 @@ if (!$row) {
     die("Cliente não encontrado.");
 }
 
-// Atualiza os dados se o formulário for enviado
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
@@ -67,3 +67,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </body>
 </html>
+
