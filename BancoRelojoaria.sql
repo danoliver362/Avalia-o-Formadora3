@@ -2,7 +2,7 @@ CREATE DATABASE db_relojoaria;
 USE db_relojoaria;
 
 -- TABELA CLIENTE
-CREATE TABLE cliente (
+CREATE TABLE clientes (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(30),
     sobrenome VARCHAR(50),
@@ -12,7 +12,7 @@ CREATE TABLE cliente (
 );
 
 -- TABELA RELOGIO
-CREATE TABLE relogio (
+CREATE TABLE relogios (
     id_relogio INT AUTO_INCREMENT PRIMARY KEY,
     marca VARCHAR(50),
     modelo VARCHAR(50),
@@ -22,7 +22,7 @@ CREATE TABLE relogio (
 );
 
 -- TABELA ORDEM DE SERVIÇO
-CREATE TABLE ordem_servico (
+CREATE TABLE ordens_servico (
     id_ordem INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(150),
     data_entrada DATE,
@@ -30,5 +30,6 @@ CREATE TABLE ordem_servico (
     forma_pgt VARCHAR(30),
     garantia VARCHAR(30),
     id_relogio INT,
+    status VARCHAR(30),
     FOREIGN KEY (id_relogio) REFERENCES relogio(id_relogio)
 );
