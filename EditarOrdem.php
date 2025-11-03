@@ -9,7 +9,7 @@ if ($id <= 0) {
 }
 
 
-$stmt = $conn->prepare("SELECT id_ordem, descricao, data_entrada, valor, forma_pgt, garantia, id_relogio FROM ordem_servico WHERE id_ordem = ?");
+$stmt = $conn->prepare("SELECT id_ordem, descricao, data_entrada, valor, forma_pgt, garantia, id_relogio, status FROM ordens_servico WHERE id_ordem = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -65,6 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <label>ID do Relógio</label><br>
         <input type="text" name="id_relogio" value="<?= htmlspecialchars($row['id_relogio'])?>" required><br><br>
+
+         <label>Status</label><br>
+        <input type="text" name="status" value="<?= htmlspecialchars($row['status'])?>" required><br><br>
 
 
         <button type="submit">Salvar Alterações</button>
