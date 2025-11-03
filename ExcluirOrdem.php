@@ -11,7 +11,7 @@ if ($id <= 0) {
 }
 
 
-$stmt = $conn->prepare("SELECT id_ordem FROM ordem_servico WHERE id_ordem = ?");
+$stmt = $conn->prepare("SELECT id_ordem FROM ordens_servico WHERE id_ordem = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -21,7 +21,7 @@ if ($result->num_rows === 0) {
 }
 
 
-$stmt = $conn->prepare("DELETE FROM ordem_servico WHERE id_ordem = ?");
+$stmt = $conn->prepare("DELETE FROM ordens_servico WHERE id_ordem = ?");
 $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
